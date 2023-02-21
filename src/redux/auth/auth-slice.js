@@ -52,3 +52,14 @@ export const authReducer = persistReducer(
   authSlice.reducer
 );
 
+  // .unwrap()
+      // .then(() => {
+      //   toast.success('You are successfully log in the phone book');
+        
+      // })
+      // .catch(() => {
+      //   toast.error(
+      //     'Incorrect email or password. Please verify your information and try login again'
+      //   );
+     
+      // });

@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { useDispatch  } from "react-redux";
 import css from "./RegisterPage.module.css";
 import { register } from '../../redux/auth/auth-operations';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { Heading,Button } from "@chakra-ui/react";
 
 const state = {
     name: '',
@@ -42,7 +42,10 @@ const  RegisterPage = () => {
   
 return (
     <div>
-        <h1 className={css.formText}> You need to Sing up</h1>
+        
+        <Heading mt="50px" textAlign="center">
+                 Sign in
+      </Heading>
         <form className={css.form} onSubmit={handleSubmit}autoComplete="off">
             <label  className={css.label}> Username
                 <input className={css.label}
@@ -79,10 +82,14 @@ return (
 
             </label>
 
-            <button className={css.formBtn}  type="submit">
-                Register
-            </button>
-
+         <Button
+        type="submit"
+        colorScheme="teal"
+        size="md"
+        ml={5}
+      >
+     Register
+      </Button>
         </form>
 
     </div>

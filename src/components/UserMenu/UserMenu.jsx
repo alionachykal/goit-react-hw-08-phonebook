@@ -1,12 +1,12 @@
 import { useDispatch, useSelector} from 'react-redux';
-
 import { selectUser } from 'redux/user/user-selector';
 import { selectToken } from 'redux/auth/auth-selectors';
 import { getUser } from 'redux/user/user-operation';
 import { logOut } from '../../redux/auth/auth-operations';
-
-import css from './UserMenu.module.css';
 import { useEffect } from 'react';
+import { Button, Container, Text } from '@chakra-ui/react';
+
+
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -19,21 +19,26 @@ export const UserMenu = () => {
     }
   }, [token, dispatch]);
 
-  return (
-      <div className={css.wrapper}>
-      {user && (
-        <>
-          <p className={css.username}> Welcome, user! ,{user.name}</p>
-          <p className={css.username}>{ user.email}</p>
-        </>
-    )}
-      <button
-        className={css.btnLogin}
-        type="button"
-        onClick={() => dispatch(logOut())}
-      >
-        Logout
-      </button>
-    </div>
-  );
-};
+            return (
+           <Container
+            display="flex"
+            ustifyContent="flex-end"
+            alignItems="center"
+              >
+                {user && (
+                  <>
+                    <Text fontSize='lg' fontWeight='500'>Hello, Welcome Back {user.name}</Text> 
+                  </>
+                )}
+                <Button
+                  type="button"
+                  colorScheme="teal"
+                  size="md"
+                  ml={5}
+                  onClick={() => dispatch(logOut())}
+                >
+                  Logout
+                </Button>
+            </Container>
+            );
+          };

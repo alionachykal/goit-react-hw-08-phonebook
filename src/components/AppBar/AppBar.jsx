@@ -1,37 +1,54 @@
 
 
 import { Navigation } from 'components/Navigation/Navigation';
- import { Container } from '@chakra-ui/react'
-
+import { AuthNav } from 'components/AuthNav/AuthNav';
+import { selectToken } from 'redux/auth/auth-selectors';
+import { UserMenu } from 'components/UserMenu/UserMenu';
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Box, Container} from '@chakra-ui/react';
 
 export const AppBar = () => {
+  const token = useSelector(selectToken);
    
   return (
+    
  
-  <>
-      <h1 style={styles.title}>
-        Phonebook 
-        <span role="img" aria-label="Telephone icon">
-          ☎️
-        </span>
-      </h1>
-      <Navigation />
+    <>
+      <Box
+        as="header"
+        bg={'teal.50'}
+        borderBottom={`1px solid`}
+        borderColor={'gray.100'}
+        fontSize={20}
+        mb={5}
+        box ={`1px solid #black`}
+      
+      >
+        <Container
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          maxW="4xl"
+          p={2}
+        >
+       {!token ? <AuthNav /> : <UserMenu />}
+          <Navigation />
+        </Container>
+         </Box>
+      <main>
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
+      </main>
     </>
-     
-          
-   
   );
 };
 
+  
+    
 
-const styles = {
-
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: 'center',
-  },
-};
 
 
 

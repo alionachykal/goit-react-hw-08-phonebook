@@ -1,44 +1,56 @@
 
-import css from './Navigation.module.css';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { selectToken } from 'redux/auth/auth-selectors';
-import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
-import { UserMenu } from 'components/UserMenu/UserMenu';
+
+import { Link, Stack } from '@chakra-ui/react'
+
+
+
 
 
 export const Navigation = () => {
     const token = useSelector(selectToken);
     
     return (
-        <>
+      
         <nav>
-            <ul className={css.link_list}>
-                {!token ? (
-                    <>
-                        <li  className={css.link} >
-                            <NavLink to= "login"  >Login</NavLink>
-                        </li>
-                        <li  className={css.link}>
-                            <NavLink to="register" >Register</NavLink>
-                        </li>
-                    </>
-                ) : (
-                        <li  className={css.link}>
-                            <UserMenu />
-                            <NavLink to="contacts" >Contacts</NavLink>
-                        </li>
-        
-                )}
-            </ul>
-        </nav>
-        <Suspense fallback={null}>
-        <Outlet/>
-        </Suspense>
-        </>
-    );
-        
-}
+        <Stack as="ul" direction={[ 'row']} spacing='24px' >
     
+          <Link
+            as={NavLink}
+            fontSize="lg"
+            fontWeight='500'
+            p={2}
+            mr={1}
+            borderRadius={'12px'}
+            to={'/'}
+            _hover={{ bg: 'teal.400', color: 'white' }}
+            _activeLink={{ bg: 'teal.500', color: 'white' }}
+          >
+            Home
+          </Link>
+  
+        {token && (
+      
+            <Link
+              as={NavLink}
+              fontSize="lg"
+              fontWeight='500'
+              p={2}
+              mr={1}
+              borderRadius={'12px'}
+              to={'contacts'}
+              _hover={{ bg: 'teal.400', color: 'white' }}
+              _activeLink={{ bg: 'teal.500', color: 'white' }}
+            >
+              Contacts
+            </Link>
+         
+        )}
+      </Stack>
+    </nav>
+  );
+};
+     
   
